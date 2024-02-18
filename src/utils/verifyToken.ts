@@ -10,7 +10,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
     if (!token) return res.status(401).send({ error: 'Unauthorized user' });
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, (err, user) => {
         if (err) return res.status(401).send({ error: 'Unauthorized' });
-        req.user = user;
+        // req.user = user;
         next();
     })
 }
