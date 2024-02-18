@@ -1,4 +1,29 @@
-MongoDB uri for this project is : mongodb+srv://rsrajeshsahoo2000:learnBackendAdmin@cluster0.uti2xyb.mongodb.net/
-(login through rs.rajes..... gmail and check Learn_Backend project for the data)
+1. MongoDB uri for this project is : mongodb+srv://rsrajeshsahoo2000:learnBackendAdmin@cluster0.uti2xyb.mongodb.net/
+2. (login through rs.rajes..... gmail and check Learn_Backend project for the data)
 
-check and test al apis in the "learn backend" folder in postman
+3. check and test all apis in the "learn backend" folder in postman
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------ToDo----------
+renew access token flow
+renew refresh token flow
+
+google sign in flow
+
+whatsapp login flow (otpless login)
