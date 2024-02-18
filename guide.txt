@@ -1,0 +1,4 @@
+MongoDB uri for this project is : mongodb+srv://rsrajeshsahoo2000:learnBackendAdmin@cluster0.uti2xyb.mongodb.net/
+(login through rs.rajes..... gmail and check Learn_Backend project for the data)
+
+check and test al apis in the "learn backend" folder in postman
