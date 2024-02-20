@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 import { authRouter } from "./routes/authRoutes";
 import { privateRouter } from "./routes/privateRoutes";
 
@@ -20,6 +21,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 app.use(express.json());
+app.use(cookieParser());
 app.use(authRouter);
 app.use(privateRouter);
 

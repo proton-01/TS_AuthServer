@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models";
 import { generateHash, verifyHash } from "../utils/password.utils";
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -48,7 +48,6 @@ const registerUser = async (req: Request, res: Response) => {
         const refreshToken = jwt.sign(payload, refreshTokenSecret, { expiresIn: '7d' });
 
         res.cookie('refresh_token', refreshToken, cookieProperties);
-        res.cookie('accesss_token', accessToken, cookieProperties);
         return res.status(201).json({
             message: 'User registred successfully',
             accessToken,
@@ -79,7 +78,6 @@ const loginUser = async (req: Request, res: Response) => {
                 const accessToken = jwt.sign(payload, accessTokenSecret, { expiresIn: '15min' });
                 const refreshToken = jwt.sign(payload, refreshTokenSecret, { expiresIn: '7d' });
 
-                res.cookie('access_token', accessToken, cookieProperties);
                 res.cookie('refresh_token', refreshToken, cookieProperties);
 
                 return res.status(201).json({
@@ -102,8 +100,24 @@ const loginUser = async (req: Request, res: Response) => {
         res.status(500).send('Internal server error');
     }
 }
+const refresh = async (req: Request, res: Response) => {
+    const refreshToken = req.cookies['refresh_token'];
+    if (!refreshToken) {
+        return res.status(401).send('Access denied! No refresh token provided.')
+    }
+    try {
+        const decoded = jwt.verify(refreshToken, refreshTokenSecret);
+        const accessToken = jwt.sign({ userId: (decoded as JwtPayload).userId }, accessTokenSecret, { expiresIn: '10min' });
+        res.header('authorization', accessToken)
+            .send(decoded);
+        console.log({ res });
+    } catch (err) {
+        return res.status(400).send('Invalid refresh token.');
+    }
 
+}
 export const authController = {
     registerUser,
-    loginUser
+    loginUser,
+    refresh,
 }
