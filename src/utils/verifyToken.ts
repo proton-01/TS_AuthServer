@@ -17,7 +17,8 @@ const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET ?? '';
 //     })
 // };
 
-export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+export const verifyToken = (req: Request, res: Response, next: NextFunction) => { 
+    // break these to, two different things and handle the renew of accesstoken from front end (reference vetan)
 
     const authHeader = req.headers['authorization'];
     let accessToken = authHeader?.split(" ")[1];
